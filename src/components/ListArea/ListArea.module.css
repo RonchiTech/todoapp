@@ -1,0 +1,21 @@
+.ListArea {
+    background: rgba(253, 253, 253, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    height: 50vh;
+    overflow: auto;
+    
+}
+.ListArea li {
+    
+    width: 60%;
+    list-style: none;
+    margin: 20px auto;
+    padding: 5px 20px;
+    background: rgba(87, 148, 228, 0.26);
+   
+    border-radius: 25px;
+}

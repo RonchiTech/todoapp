@@ -1,0 +1,28 @@
+.Form{
+    width: 70%;
+    margin: 30px auto;
+    text-align: center;
+}
+.ToDoInput {
+    outline: none;
+    width: 70%;
+    border: none;
+    border-radius: 25px;
+    height: 25px;
+    padding: 15px 25px;
+    
+}
+.Button {
+    margin-left: -50px;
+    border-radius: 25px;
+    height: 30px;
+    width: 70px;
+    border: none;
+    outline: none;
+    background: #000000;
+    color: #fff
+}
+.Button:hover{
+    background: #1571bd;
+    
+}
