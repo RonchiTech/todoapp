@@ -16,7 +16,7 @@ const ListArea = (props) => {
   let list = todos.map((todo) => {
     return (
       <li key={todo.id} onClick={() => deleteHandler(todo.id)}>
-        {todo.name}
+        {todo.todo}
       </li>
     );
   });
@@ -34,8 +34,8 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    onFetchTodo: () => dispatch(actionTypes.fetchTodo()),
-    onDeleteTodo: (id) => dispatch(actionTypes.deleteTodo(id))
+    onFetchTodo: () => dispatch(actionTypes.fetchTodoStart()),
+    onDeleteTodo: (id) => dispatch(actionTypes.deleteTodoStart(id))
   };
 };
 

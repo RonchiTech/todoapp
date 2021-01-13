@@ -7,7 +7,7 @@ export const initializeTodo = () => {
   }
 }
 
-export const fetchTodo = () => {
+export const fetchTodoStart = () => {
   return dispatch => {
     dispatch(initializeTodo())
     axios.get('https://todoapp-a6d7d-default-rtdb.firebaseio.com/todo.json')
@@ -19,66 +19,78 @@ export const fetchTodo = () => {
           id: key
         });
       }
-      dispatch(storeTodo(list))
+      dispatch(fetchTodoSuccess(list))
     })
     .catch(error => {
-      dispatch(errorTodo(error))
+      dispatch(fetchTodoFailed(error))
     })
   }
 }
 
-export const storeTodo = (todos) => {
+export const fetchTodoFailed = (error) => {
+  return {
+    type: actionTypes.FETCH_TODO_FAILED,
+    error
+  }
+}
+export const fetchTodoSuccess = (todos) => {
     return {
-        type: actionTypes.STORE_TODO,
+        type: actionTypes.FETCH_TODO_SUCCESS,
         todos
         
     }
 }
 
-export const errorTodo = (error) => {
-  return {
-    type: actionTypes.ERROR_TODO,
-    error
-  }
-}
-export const addTodo = (todos) => {
+
+export const addTodoStart = (todo) => {
   return dispatch => {
     dispatch(initializeTodo())
     axios.post('https://todoapp-a6d7d-default-rtdb.firebaseio.com/todo.json', {
-      name: todos
+      todo
     }).then(response => {
-      // const list = [];
-      // for(let key in response.data){
-      //   list.push({
-      //     ...response.data[key],
-      //     id: key
-      //   });
-      // }
-      // console.log(list);
-      // dispatch(storeTodo(list))
-      dispatch(fetchTodo())
+      dispatch(addTodoSuccess())
+      dispatch(fetchTodoStart())
+    }).catch(error => {
+      dispatch(addTodoFailed(error))
     })
   };
 };
+export const addTodoSuccess = () => {
+  return { 
+    type: actionTypes.ADD_TODO_SUCCESS
+  }
+}
 
+export const addTodoFailed = (error) => {
+  return{
+    type: actionTypes.ADD_TODO_FAILED,
+    error
+  }
+}
 
-export const deleteTodo = (id) => {
+export const deleteTodoStart = (id) => {
   return dispatch => {
     dispatch(initializeTodo())
     axios.delete(`https://todoapp-a6d7d-default-rtdb.firebaseio.com/todo/${id}/.json`)
     .then(response => {
-      // const list = [];
-      // for(let key in response.data){
-      //   list.push({
-      //     ...response.data[key],
-      //     id: key
-      //   });
-      // }
-      // dispatch(storeToDo(list))
-      dispatch(fetchTodo())
+      dispatch(deleteTodoSuccess())
+      dispatch(fetchTodoStart())
     })
     .catch(error => {
-      dispatch(errorTodo(error))
+      dispatch(deleteTodoFailed(error))
     })
+  }
+}
+
+export const deleteTodoSuccess = () => {
+  return {
+    type: actionTypes.DELETE_TODO_SUCCESS
+  }
+}
+
+export const deleteTodoFailed = (error) => {
+  return {
+    type: actionTypes.DELETE_TODO_FAILED,
+    error
   }
 }

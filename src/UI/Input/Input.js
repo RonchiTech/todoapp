@@ -40,7 +40,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    onSendTodo: (inputValue) => dispatch(actions.addTodo(inputValue)),
+    onSendTodo: (inputValue) => dispatch(actions.addTodoStart(inputValue)),
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Input);

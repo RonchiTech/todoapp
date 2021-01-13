@@ -7,22 +7,44 @@ const initialState = {
 
 const reducers = (state = initialState, action) => {
   switch (action.type) {
-    case actionTypes.STORE_TODO:
+    case actionTypes.FETCH_TODO_SUCCESS:
       return {
         ...state,
         isLoading: false,
         todos: [...action.todos],
       };
+    case actionTypes.FETCH_TODO_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.error
+      }
     case actionTypes.INITIALIZE_TODO: 
     return {
       ...state,
       isLoading: true
     }
-    case actionTypes.ERROR_TODO:
+    case actionTypes.ADD_TODO_SUCCESS:
       return {
         ...state,
-        error: action.error,
-        isLoading: false
+        isLoading: false,
+      }
+      case actionTypes.ADD_TODO_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.error
+      }
+      case actionTypes.DELETE_TODO_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+      }
+      case actionTypes.DELETE_TODO_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.error
       }
     default:
       return state;
