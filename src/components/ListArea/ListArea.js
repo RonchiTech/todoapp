@@ -1,23 +1,37 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import classes from './ListArea.module.css';
 import { connect } from 'react-redux';
 import * as actionTypes from '../../store/actions/index';
 
-const ListArea = (props) => {
+const ListArea =  React.memo((props) => {
   const { onFetchTodo, todos, onDeleteTodo } = props;
+  const [isDone, setIsDone] = useState(false)
   useEffect(() => {
     onFetchTodo();
   }, [onFetchTodo]);
 
-  const deleteHandler = useCallback((id) => {
-    onDeleteTodo(id);
-  },[onDeleteTodo]);
- 
+  const deleteHandler = useCallback(
+    (id) => {
+      onDeleteTodo(id);
+    },
+    [onDeleteTodo]
+  );
+  const isDoneHandler = () => {
+    setIsDone(!isDone)
+  }
+  const style = isDone ? {
+    textDecoration: 'line-through'
+  }  : null
+  const classList = ({
+    list: true,
+    listDone: isDone 
+  })
   let list = todos.map((todo) => {
     return (
-      <li key={todo.id} onClick={() => deleteHandler(todo.id)}>
-        {todo.todo}
-      </li>
+      <span key={todo.id}>
+        <li className={classList} onClick={isDoneHandler} style={style}>{todo.todo}</li>
+        <button onClick={() => deleteHandler(todo.id)}>x</button>
+      </span>
     );
   });
   return (
@@ -25,17 +39,17 @@ const ListArea = (props) => {
       <ul>{list}</ul>
     </div>
   );
-};
+});
 const mapStateToProps = (state) => {
   return {
     todos: state.todos,
-    isLoading: state.isLoading
+    isLoading: state.isLoading,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     onFetchTodo: () => dispatch(actionTypes.fetchTodoStart()),
-    onDeleteTodo: (id) => dispatch(actionTypes.deleteTodoStart(id))
+    onDeleteTodo: (id) => dispatch(actionTypes.deleteTodoStart(id)),
   };
 };
 
