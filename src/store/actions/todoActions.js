@@ -94,3 +94,9 @@ export const deleteTodoFailed = (error) => {
     error
   }
 }
+
+export const isDone = () => {
+  return {
+    type: actionTypes.IS_DONE
+  }
+}

@@ -1,7 +1,10 @@
 import * as actionTypes from '../actions/actionTypes';
 const initialState = {
   isLoading: false,
-  todos: [],
+  todos: {
+  
+    isDone: false,
+  },
   error: null
 };
 
@@ -28,6 +31,7 @@ const reducers = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
+        isDone: false,
       }
       case actionTypes.ADD_TODO_FAILED:
       return {
@@ -46,6 +50,11 @@ const reducers = (state = initialState, action) => {
         isLoading: false,
         error: action.error
       }
+      case actionTypes.IS_DONE:
+        return {
+          ...state,
+          isDone: true
+        }
     default:
       return state;
   }

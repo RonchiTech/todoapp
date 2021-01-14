@@ -44,12 +44,14 @@ const mapStateToProps = (state) => {
   return {
     todos: state.todos,
     isLoading: state.isLoading,
+    isDone: state.isDone
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     onFetchTodo: () => dispatch(actionTypes.fetchTodoStart()),
     onDeleteTodo: (id) => dispatch(actionTypes.deleteTodoStart(id)),
+    onIsDone: () => dispatch(actionTypes.isDone())
   };
 };
 

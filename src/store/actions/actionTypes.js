@@ -24,3 +24,5 @@ export const DELETE_TODO_START = 'DELETE_TODO_START'
 export const DELETE_TODO_SUCCESS = 'DELETE_TODO_SUCCESS'
 export const DELETE_TODO_FAILED = 'DELETE_TODO_FAILED'
 // export const STORE_TODO = 'STORE_TODO'
+
+export const IS_DONE = 'IS_DONE'
