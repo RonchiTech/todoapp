@@ -1,1 +1,1 @@
-export { addTodoStart, fetchTodoStart, deleteTodoStart, isDone } from './todoActions'
+export { addTodoStart, fetchTodoStart, deleteTodoStart, isDoneStart } from './todoActions'

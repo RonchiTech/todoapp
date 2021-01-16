@@ -3,9 +3,9 @@ import classes from './ListArea.module.css';
 import { connect } from 'react-redux';
 import * as actionTypes from '../../store/actions/index';
 
-const ListArea =  React.memo((props) => {
-  const { onFetchTodo, todos, onDeleteTodo } = props;
-  const [isDone, setIsDone] = useState(false)
+const ListArea = React.memo((props) => {
+  const { onFetchTodo, mytodos, onDeleteTodo, onIsDone } = props;
+  const [itsDone, setItsDone] = useState(false);
   useEffect(() => {
     onFetchTodo();
   }, [onFetchTodo]);
@@ -16,42 +16,57 @@ const ListArea =  React.memo((props) => {
     },
     [onDeleteTodo]
   );
-  const isDoneHandler = () => {
-    setIsDone(!isDone)
-  }
-  const style = isDone ? {
-    textDecoration: 'line-through'
-  }  : null
-  const classList = ({
-    list: true,
-    listDone: isDone 
-  })
-  let list = todos.map((todo) => {
+  const isDoneHandler = (id) => {
+    console.log(id);
+    onIsDone(id);
+  };
+  // const style = itsDone
+  //   ? {
+  //       textDecoration: 'line-through',
+  //     }
+  //   : null;
+  // const classList = {
+  //   list: true,
+  //   listDone: itsDone,
+  // };
+
+  const list = mytodos.map((key) => {
+    console.log(key);
     return (
-      <span key={todo.id}>
-        <li className={classList} onClick={isDoneHandler} style={style}>{todo.todo}</li>
-        <button onClick={() => deleteHandler(todo.id)}>x</button>
+      <span key={key.id}>
+        <li
+          className={null}
+          onClick={()=>isDoneHandler(key.id)}
+          style={null}
+        >
+          {key.objTodo.todo}
+        </li>
+        <button onClick={() => deleteHandler(key.id)}>x</button>
       </span>
     );
   });
   return (
     <div className={classes.ListArea}>
-      <ul>{list}</ul>
+      <ul>
+        {list}
+        {console.log(mytodos)}
+      </ul>
     </div>
   );
 });
 const mapStateToProps = (state) => {
   return {
-    todos: state.todos,
+    mytodos: state.mytodos,
     isLoading: state.isLoading,
-    isDone: state.isDone
+    // isDone: state.mytodos.isDone,
+    // id: state.mytodos
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     onFetchTodo: () => dispatch(actionTypes.fetchTodoStart()),
     onDeleteTodo: (id) => dispatch(actionTypes.deleteTodoStart(id)),
-    onIsDone: () => dispatch(actionTypes.isDone())
+    onIsDone: (id) => dispatch(actionTypes.isDoneStart(id)),
   };
 };
 
