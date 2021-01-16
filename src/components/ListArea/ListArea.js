@@ -1,11 +1,10 @@
-import React, { useEffect, useCallback, useState } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import classes from './ListArea.module.css';
 import { connect } from 'react-redux';
 import * as actionTypes from '../../store/actions/index';
 
 const ListArea = React.memo((props) => {
   const { onFetchTodo, mytodos, onDeleteTodo, onIsDone } = props;
-  const [itsDone, setItsDone] = useState(false);
   useEffect(() => {
     onFetchTodo();
   }, [onFetchTodo]);
@@ -16,9 +15,9 @@ const ListArea = React.memo((props) => {
     },
     [onDeleteTodo]
   );
-  const isDoneHandler = (id) => {
+  const isDoneHandler = (id,isDone) => {
     console.log(id);
-    onIsDone(id);
+    onIsDone(id,isDone);
   };
   // const style = itsDone
   //   ? {
@@ -35,9 +34,9 @@ const ListArea = React.memo((props) => {
     return (
       <span key={key.id}>
         <li
-          className={null}
-          onClick={()=>isDoneHandler(key.id)}
-          style={null}
+          style={{textDecoration: key.objTodo.isDone ? 'line-through' : null,
+        background: key.objTodo.isDone ? 'gray' : null}}
+          onClick={()=>isDoneHandler(key.id,!key.objTodo.isDone)}
         >
           {key.objTodo.todo}
         </li>
@@ -66,7 +65,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onFetchTodo: () => dispatch(actionTypes.fetchTodoStart()),
     onDeleteTodo: (id) => dispatch(actionTypes.deleteTodoStart(id)),
-    onIsDone: (id) => dispatch(actionTypes.isDoneStart(id)),
+    onIsDone: (id,isDone) => dispatch(actionTypes.isDoneStart(id,isDone)),
   };
 };
 

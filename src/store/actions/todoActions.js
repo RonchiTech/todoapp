@@ -130,12 +130,12 @@ export const deleteTodoFailed = (error) => {
   }
 }
 
-export const isDoneStart = (id) => {
+export const isDoneStart = (id,isDone) => {
   return dispatch => {
     axios.patch(`https://todoapp-a6d7d-default-rtdb.firebaseio.com/todo/${id}/objTodo.json`,{
-      isDone: 'true'
+      isDone
     }).then(response =>{
-      console.log(response);
+     dispatch(fetchTodoStart());
     }).catch(err => {
       console.log(err);
     })

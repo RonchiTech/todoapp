@@ -23,6 +23,7 @@ const reducers = (state = initialState, action) => {
       return {
         ...state,
         mytodos: [...action.payload],
+        isLoading:false
       };
 
     case actionTypes.FETCH_TODO_FAILED:
