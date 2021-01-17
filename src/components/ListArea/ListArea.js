@@ -11,7 +11,7 @@ const ListArea = () => {
       <div className={classes.ListArea}>
         <Navigation />
        
-          <Route exact path="/" component={ListAll} />
+          <Route exact path="/" component={()=> <ListAll/>} />
           <Route  path="/done" component={ListDone} />
      
       </div>

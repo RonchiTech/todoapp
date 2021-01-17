@@ -18,18 +18,18 @@ const ListArea = React.memo((props) => {
     // console.log(id);
     onIsDone(id, isDone);
   };
-  // const style = itsDone
-  //   ? {
-  //       textDecoration: 'line-through',
-  //     }
-  //   : null;
-  // const classList = {
-  //   list: true,
-  //   listDone: itsDone,
-  // };
-
+//   const style = itsDone
+//     ? {
+//         textDecoration: 'line-through',
+//       }
+//     : null;
+//   const classList = {
+//     list: true,
+//     listDone: itsDone,
+//   };
+// const list = mytodos.filter(todo => todo.objTodo.isDone !== 'false')
   const list = mytodos.map((key) => {
-    // console.log(key);
+    console.log(key);
     return (
       <span key={key.id}>
         <li
@@ -47,6 +47,7 @@ const ListArea = React.memo((props) => {
       </span>
     );
   });
+
   return (
     <ul className={classes.List}>
       {list}
