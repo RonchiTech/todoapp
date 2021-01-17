@@ -1,0 +1,10 @@
+.NavList{
+    display: flex;
+    width: 70%;
+    margin: 25px auto 30px auto;
+    justify-content: center;
+}
+.NavList li {
+    list-style: none;
+    margin: 0 10px;
+}

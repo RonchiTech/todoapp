@@ -2,7 +2,7 @@ import React, { useEffect, useCallback } from 'react';
 import classes from './ListArea.module.css';
 import { connect } from 'react-redux';
 import * as actionTypes from '../../store/actions/index';
-
+import Navigation from '../../Navigations/Navigation';
 const ListArea = React.memo((props) => {
   const { onFetchTodo, mytodos, onDeleteTodo, onIsDone } = props;
   useEffect(() => {
@@ -15,9 +15,9 @@ const ListArea = React.memo((props) => {
     },
     [onDeleteTodo]
   );
-  const isDoneHandler = (id,isDone) => {
-    console.log(id);
-    onIsDone(id,isDone);
+  const isDoneHandler = (id, isDone) => {
+    // console.log(id);
+    onIsDone(id, isDone);
   };
   // const style = itsDone
   //   ? {
@@ -30,15 +30,17 @@ const ListArea = React.memo((props) => {
   // };
 
   const list = mytodos.map((key) => {
-    console.log(key);
+    // console.log(key);
     return (
       <span key={key.id}>
         <li
-          style={{textDecoration: key.objTodo.isDone ? 'line-through' : null,
-        background: key.objTodo.isDone ? '#DADBE6' : null,
-        color: key.objTodo.isDone ? '#2A2D34' : null
-      }}
-          onClick={()=>isDoneHandler(key.id,!key.objTodo.isDone)}
+          style={{
+            textDecoration: key.objTodo.isDone ? 'line-through' : null,
+            background: key.objTodo.isDone ? '#DADBE6' : null,
+            color: key.objTodo.isDone ? '#2A2D34' : null,
+          }}
+          className={classes.Todolist}
+          onClick={() => isDoneHandler(key.id, !key.objTodo.isDone)}
         >
           {key.objTodo.todo}
         </li>
@@ -47,12 +49,15 @@ const ListArea = React.memo((props) => {
     );
   });
   return (
-    <div className={classes.ListArea}>
-      <ul>
-        {list}
-        {console.log(mytodos)}
-      </ul>
-    </div>
+    <React.Fragment>
+      <div className={classes.ListArea}>
+        <Navigation />
+        <ul className={classes.List}>
+          {list}
+          {/* {console.log(mytodos)} */}
+        </ul>
+      </div>
+    </React.Fragment>
   );
 });
 const mapStateToProps = (state) => {
@@ -67,7 +72,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onFetchTodo: () => dispatch(actionTypes.fetchTodoStart()),
     onDeleteTodo: (id) => dispatch(actionTypes.deleteTodoStart(id)),
-    onIsDone: (id,isDone) => dispatch(actionTypes.isDoneStart(id,isDone)),
+    onIsDone: (id, isDone) => dispatch(actionTypes.isDoneStart(id, isDone)),
   };
 };
 

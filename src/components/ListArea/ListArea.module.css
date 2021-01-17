@@ -1,7 +1,6 @@
-span {
+.List {
   display: inline-block;
-  width: 70%;
-  margin: 0 50px;
+  margin: 0 auto;
   text-align: center;
 }
 .ListArea {
@@ -15,7 +14,7 @@ span {
   overflow: auto;
 }
 
-.ListArea li {
+.Todolist {
   display: inline-block;
   width: 50%;
   list-style: none;
@@ -26,7 +25,7 @@ span {
   margin: 5px 10px;
   padding: 5px 15px;
 }
-.ListArea li:hover {
+.Todolist:hover {
   cursor: pointer;
 }
 .ListArea button {

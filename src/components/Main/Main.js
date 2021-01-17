@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './Main.module.css';
 import ToDoArea from '../ToDoArea/ToDoArea';
 import ListArea from '../ListArea/ListArea';
+
 const Main = () => {
   
   return (
