@@ -35,7 +35,9 @@ const ListArea = React.memo((props) => {
       <span key={key.id}>
         <li
           style={{textDecoration: key.objTodo.isDone ? 'line-through' : null,
-        background: key.objTodo.isDone ? 'gray' : null}}
+        background: key.objTodo.isDone ? '#DADBE6' : null,
+        color: key.objTodo.isDone ? '#2A2D34' : null
+      }}
           onClick={()=>isDoneHandler(key.id,!key.objTodo.isDone)}
         >
           {key.objTodo.todo}

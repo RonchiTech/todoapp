@@ -1,28 +1,39 @@
-.Form{
-    width: 70%;
-    margin: 30px auto;
-    text-align: center;
+/*
+Main: #C6E2E9
+Secondary: #DAE3E6
+Accent: #D9FFFF
+*/
+.Form {
+  width: 70%;
+  margin: 30px auto;
+  text-align: center;
 }
 .ToDoInput {
-    outline: none;
-    width: 70%;
-    border: none;
-    border-radius: 25px;
-    height: 25px;
-    padding: 15px 25px;
-    
+  outline: none;
+  width: 90%;
+  border: 2px solid #2A2D34;
+  border-radius: 25px;
+  height: 25px;
+  padding: 15px 25px;
+  color: #2A2D34;
+
+}
+.ToDoInput::-webkit-input-placeholder {
+  color: #2A2D34;
 }
 .Button {
-    margin-left: -50px;
-    border-radius: 25px;
-    height: 30px;
-    width: 70px;
-    border: none;
-    outline: none;
-    background: #000000;
-    color: #fff
+  margin-left: -96px;
+  border-radius: 25px;
+  border: none;
+  height: 30px;
+  width: 95px;
+  outline: none;
+  background: #2A2D34;
+  color: #DADBE6;
+  padding: 5px 0;
 }
-.Button:hover{
-    background: #1571bd;
-    
+.Button:hover {
+  background: #C5C8E8;
+  color: #37322F;
+  border: none;
 }
