@@ -75,7 +75,6 @@ export const fetchTodoSuccess = (todos) => {
 
 export const addTodoStart = (todo) => {
   return dispatch => {
-    dispatch(initializeTodo())
     const objTodo = {
       todo,
       isDone: false
@@ -105,7 +104,6 @@ export const addTodoFailed = (error) => {
 
 export const deleteTodoStart = (id) => {
   return dispatch => {
-    dispatch(initializeTodo())
     axios.delete(`https://todoapp-a6d7d-default-rtdb.firebaseio.com/todo/${id}/.json`)
     .then(response => {
       dispatch(deleteTodoSuccess())
