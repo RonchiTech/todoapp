@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classes from './auth.module.css';
 import { useFormik  } from 'formik';
+import { connect } from 'react-redux';
+import * as action from '../store/actions/index'
 
 const validate = values => {
     const errors = {};
@@ -29,9 +31,15 @@ const validate = values => {
     }
     return errors;
   };
-const Auth = () => {
+const Auth = ({onAuth}) => {
+    const [isSignUp, setIsSignUp] = useState(true);
+
+    const SignUpHandler = () => {
+        setIsSignUp(!isSignUp);
+    }
     const FormHandler = (values) => {
-        console.log(values);
+        console.log(values,isSignUp);
+        onAuth(values,isSignUp)
     }
     const formik = useFormik({
         initialValues: {
@@ -84,10 +92,16 @@ const Auth = () => {
        value={formik.values.password}
      />
      {formik.errors.password ? <div className={classes.errors}>{formik.errors.password}</div> : null}
-
-     <button type="submit">Submit</button>
+     <button type="submit">{ isSignUp ?  'Sign Up': 'Sign In'}</button>
    </form>
+   <p onClick={SignUpHandler}className={classes.switching}>Click here to switch to {isSignUp ?  'Sign In': 'Sign Up'}</p>
     </div>
 );
 }
-export default Auth;
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onAuth: (values,isSignUp) => dispatch(action.auth(values,isSignUp))
+    }
+}
+export default connect(null,mapDispatchToProps)(Auth);

@@ -42,3 +42,9 @@ button {
     outline: none;
     cursor: pointer;
 }
+
+.switching {
+    cursor: pointer;
+    text-decoration: underline;
+    color: rosybrown;
+}
