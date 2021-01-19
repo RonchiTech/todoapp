@@ -97,8 +97,8 @@ const ListArea = React.memo((props) => {
 
 const mapStateToProps = (state) => {
   return {
-    mytodos: state.mytodos,
-    isLoading: state.isLoading,
+    mytodos: state.todoReducer.mytodos,
+    isLoading: state.todoReducer.isLoading,
     // isDone: state.mytodos.isDone,
     // id: state.mytodos
   };

@@ -4,9 +4,11 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
-import rootReducer from './store/reducers/todoReducers';
+import todoReducer from './store/reducers/todoReducers';
+import authReducer from './store/reducers/authReducers';
+import { BrowserRouter } from 'react-router-dom';
 
 // const composeEnhancers =
 //   typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -14,12 +16,22 @@ import rootReducer from './store/reducers/todoReducers';
 //         // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
 //       })
 //     : compose;
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
+const rootReducer = combineReducers({
+  todoReducer,
+  authReducer,
+});
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(thunk))
+);
 const app = (
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>
 );

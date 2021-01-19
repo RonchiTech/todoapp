@@ -31,15 +31,15 @@ const validate = values => {
     }
     return errors;
   };
-const Auth = ({onAuth}) => {
+const Auth = ({onAuth, error}) => {
     const [isSignUp, setIsSignUp] = useState(true);
 
     const SignUpHandler = () => {
         setIsSignUp(!isSignUp);
     }
     const FormHandler = (values) => {
-        console.log(values,isSignUp);
-        onAuth(values,isSignUp)
+        // console.log(values.email,values.password,isSignUp);
+        onAuth(values.email,values.password,isSignUp)
     }
     const formik = useFormik({
         initialValues: {
@@ -53,8 +53,9 @@ const Auth = ({onAuth}) => {
       });
   return (
     <div className={classes.Auth}>
-      <h2 className={classes.title}>Ronchi Todo</h2>
-     <form onSubmit={formik.handleSubmit}>
+      <h2 className={classes.title}> Ronchi Todo</h2>
+      <div style={{textAlign: 'center', color: 'red',marginBottom: '15px'}}>{error ? error : null}</div>
+     <form className={classes.Form} onSubmit={formik.handleSubmit}>
      {/* <label htmlFor="firstName">First Name</label>
      <input
        id="firstName"
@@ -75,6 +76,7 @@ const Auth = ({onAuth}) => {
      {formik.errors.lastName ? <div>{formik.errors.lastName}</div> : null} */}
      <label htmlFor="email">Email Address</label>
      <input
+      className={classes.Input}
        id="email"
        name="email"
        type="email"
@@ -85,6 +87,7 @@ const Auth = ({onAuth}) => {
 
      <label htmlFor="password">Password</label>
      <input
+     className={classes.Input}
        id="password"
        name="password"
        type="password"
@@ -92,16 +95,20 @@ const Auth = ({onAuth}) => {
        value={formik.values.password}
      />
      {formik.errors.password ? <div className={classes.errors}>{formik.errors.password}</div> : null}
-     <button type="submit">{ isSignUp ?  'Sign Up': 'Sign In'}</button>
+     <button className={classes.Button}type="submit">{ isSignUp ?  'Sign Up': 'Sign In'}</button>
    </form>
    <p onClick={SignUpHandler}className={classes.switching}>Click here to switch to {isSignUp ?  'Sign In': 'Sign Up'}</p>
     </div>
 );
 }
-
+const mapStateToProps = (state) => {
+ return {
+   error: state.authReducer.error
+ }
+}
 const mapDispatchToProps = (dispatch) => {
     return {
-        onAuth: (values,isSignUp) => dispatch(action.auth(values,isSignUp))
+        onAuth: (email,password,isSignUp) => dispatch(action.auth(email,password,isSignUp))
     }
 }
-export default connect(null,mapDispatchToProps)(Auth);
+export default connect(mapStateToProps,mapDispatchToProps)(Auth);

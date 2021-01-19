@@ -1,13 +1,14 @@
 .Auth {
-  background: #c5c8e8;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(1px);
-  border-radius: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  height: 50vh;
-  overflow: auto;
-  padding: 15% 5%;
+    background: #C5C8E8;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+    border-radius: 15px;
+    border: 1px solid #ffffff2e;
+    height: 40vh;
+    margin: 25px auto;
+    width: 30%;
+    padding: 25px 15px;
 }
 .title {
   margin: 15px 0;
@@ -15,14 +16,14 @@
   color: #2a2d34;
   font-size: 1.2rem;
 } 
-form {
+.Form {
     width: 70%;
     margin: 0 auto;
 }
 .errors {
     color: red;
 }
-input {
+.Input {
     display: block;
     width: 100%;
     margin-top: 5px;
@@ -32,7 +33,7 @@ input {
     padding: 5px 15px;
 }
 
-button {
+.Button {
     display: block;
     margin: 25px auto;
     padding: 10px 25px;
