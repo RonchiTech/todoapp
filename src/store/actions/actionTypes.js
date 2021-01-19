@@ -28,3 +28,8 @@ export const DELETE_TODO_FAILED = 'DELETE_TODO_FAILED'
 export const IS_DONE_START = 'IS_DONE_START'
 export const IS_DONE_SUCCESS = 'IS_DONE_SUCCESS'
 export const IS_DONE_FAILED = 'IS_DONE_FAILED'
+
+export const AUTH = 'AUTH'
+export const AUTH_START = 'AUTH_START'
+export const AUTH_SUCCESS = 'AUTH_SUCCESS'
+export const AUTH_FAILED ='AUTH_FAIL'

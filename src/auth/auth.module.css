@@ -1,0 +1,44 @@
+.Auth {
+  background: #c5c8e8;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  height: 50vh;
+  overflow: auto;
+  padding: 15% 5%;
+}
+.title {
+  margin: 15px 0;
+  text-align: center;
+  color: #2a2d34;
+  font-size: 1.2rem;
+} 
+form {
+    width: 70%;
+    margin: 0 auto;
+}
+.errors {
+    color: red;
+}
+input {
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    padding: 5px 15px;
+}
+
+button {
+    display: block;
+    margin: 25px auto;
+    padding: 10px 25px;
+    width: 120px;
+    border-radius: 11px;
+    border: 1px solid black;
+    outline: none;
+    cursor: pointer;
+}
