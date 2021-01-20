@@ -9,6 +9,7 @@ export const initializeTodo = () => {
 
 export const fetchTodoStart = () => {
   return dispatch => {
+    dispatch(initializeTodo())
     axios.get('https://todoapp-a6d7d-default-rtdb.firebaseio.com/todo.json')
     .then(response => {
       

@@ -34,7 +34,7 @@ const Input = ({ onSendTodo, isLoading }) => {
 };
 const mapStateToProps = state => {
   return {
-    isLoading: state.isLoading
+    isLoading: state.todoReducer.isLoading
     
   }
 }
