@@ -7,10 +7,11 @@ export const initializeTodo = () => {
   }
 }
 
-export const fetchTodoStart = () => {
+export const fetchTodoStart = (localId) => {
+  
   return dispatch => {
     dispatch(initializeTodo())
-    axios.get('https://todoapp-a6d7d-default-rtdb.firebaseio.com/todo.json')
+    axios.get(`https://todoapp-a6d7d-default-rtdb.firebaseio.com/${localId}/todo.json`)
     .then(response => {
       
       const list = [];
@@ -40,29 +41,6 @@ export const fetchTodoFailed = (error) => {
   }
 }
 export const fetchTodoSuccess = (todos) => {
-  // console.log(todos);
-    // const arrTodo = [];
-    // let idTodo = null;
-    // let isDoneTodo = null;
-    // for(let key in todos){
-    //   // console.log('key',key);
-    //   // console.log('todos',todos);
-    //   arrTodo.push(todos[key].objTodo.todo);
-    //   isDoneTodo = todos[key].objTodo.isDone
-    //   idTodo= todos[key].id;
-    //   // arrTodo.push(todos[key])
-    // }
-    // console.log('this is array todo', todos);
-    // let arr = [];
-    // for(let key in todos) {
-    //   console.log(todos[key])
-    //   arr.push({
-    //     id: todos[key].id,
-    //     isDone: todos[key].objTodo.isDone,
-    //     todo: todos[key].objTodo.todo
-    //   })
-    // }
-    // console.log('hey',arr);
     return {
         type: actionTypes.FETCH_TODO_SUCCESS,
         payload: todos
@@ -73,18 +51,16 @@ export const fetchTodoSuccess = (todos) => {
 }
 
 
-export const addTodoStart = (todo) => {
+export const addTodoStart = (todo,localId) => {
   return dispatch => {
     dispatch(initializeTodo())
-    const objTodo = {
+  
+    axios.post(`https://todoapp-a6d7d-default-rtdb.firebaseio.com/${localId}/todo.json`, {
       todo,
       isDone: false
-    }
-    axios.post('https://todoapp-a6d7d-default-rtdb.firebaseio.com/todo.json', {
-      objTodo
     }).then(response => {
       dispatch(addTodoSuccess())
-      dispatch(fetchTodoStart())
+      dispatch(fetchTodoStart(localId))
     }).catch(error => {
       dispatch(addTodoFailed(error))
     })
@@ -103,13 +79,13 @@ export const addTodoFailed = (error) => {
   }
 }
 
-export const deleteTodoStart = (id) => {
+export const deleteTodoStart = (id,localId) => {
   return dispatch => {
     dispatch(initializeTodo())
-    axios.delete(`https://todoapp-a6d7d-default-rtdb.firebaseio.com/todo/${id}/.json`)
+    axios.delete(`https://todoapp-a6d7d-default-rtdb.firebaseio.com/${localId}/todo/${id}/.json`)
     .then(response => {
       dispatch(deleteTodoSuccess())
-      dispatch(fetchTodoStart())
+      dispatch(fetchTodoStart(localId))
     })
     .catch(error => {
       dispatch(deleteTodoFailed(error))
@@ -130,13 +106,13 @@ export const deleteTodoFailed = (error) => {
   }
 }
 
-export const isDoneStart = (id,isDone) => {
+export const isDoneStart = (id,isDone,localId) => {
   return dispatch => {
     dispatch(initializeTodo())
-    axios.patch(`https://todoapp-a6d7d-default-rtdb.firebaseio.com/todo/${id}/objTodo.json`,{
+    axios.patch(`https://todoapp-a6d7d-default-rtdb.firebaseio.com/${localId}/todo/${id}/.json`,{
       isDone
     }).then(response =>{
-     dispatch(fetchTodoStart());
+     dispatch(fetchTodoStart(localId));
     }).catch(err => {
       console.log(err);
     })

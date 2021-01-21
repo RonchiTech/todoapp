@@ -5,20 +5,20 @@ import Navigation from '../../Navigations/Navigation';
 import { connect } from 'react-redux';
 import * as actionTypes from '../../store/actions/index';
 const ListArea = React.memo((props) => {
-  const { onFetchTodo, mytodos, onDeleteTodo, onIsDone } = props;
+  const { onFetchTodo, mytodos, onDeleteTodo, onIsDone, localId } = props;
   useEffect(() => {
-    onFetchTodo();
-  }, [onFetchTodo]);
+    onFetchTodo(localId);
+  }, [onFetchTodo,localId]);
 
   const deleteHandler = useCallback(
     (id) => {
-      onDeleteTodo(id);
+      onDeleteTodo(id,localId);
     },
-    [onDeleteTodo]
+    [onDeleteTodo,localId]
   );
-  const isDoneHandler = (id, isDone) => {
+  const isDoneHandler = (id, isDone, ) => {
     // console.log(id);
-    onIsDone(id, isDone);
+    onIsDone(id, isDone, localId);
   };
   // console.log('mytodos', mytodos);
   const listAll = mytodos.map((key) => {
@@ -27,14 +27,14 @@ const ListArea = React.memo((props) => {
       <span key={key.id}>
         <li
           style={{
-            textDecoration: key.objTodo.isDone ? 'line-through' : null,
-            background: key.objTodo.isDone ? '#DADBE6' : null,
-            color: key.objTodo.isDone ? '#2A2D34' : null,
+            textDecoration: key.isDone ? 'line-through' : null,
+            background: key.isDone ? '#DADBE6' : null,
+            color: key.isDone ? '#2A2D34' : null,
           }}
           className={classes.Todolist}
-          onClick={() => isDoneHandler(key.id, !key.objTodo.isDone)}
+          onClick={() => isDoneHandler(key.id, !key.isDone)}
         >
-          {key.objTodo.todo}
+          {key.todo}
         </li>
         <button onClick={() => deleteHandler(key.id)}>x</button>
       </span>
@@ -42,40 +42,40 @@ const ListArea = React.memo((props) => {
   });
 
   const listTodo = mytodos
-    .filter((todo) => todo.objTodo.isDone !== true)
+    .filter((todo) => todo.isDone !== true)
     .map((key) => {
       return (
         <span key={key.id}>
           <li
             style={{
-              textDecoration: key.objTodo.isDone ? 'line-through' : null,
-              background: key.objTodo.isDone ? '#DADBE6' : null,
-              color: key.objTodo.isDone ? '#2A2D34' : null,
+              textDecoration: key.isDone ? 'line-through' : null,
+              background: key.isDone ? '#DADBE6' : null,
+              color: key.isDone ? '#2A2D34' : null,
             }}
             className={classes.Todolist}
-            onClick={() => isDoneHandler(key.id, !key.objTodo.isDone)}
+            onClick={() => isDoneHandler(key.id, !key.isDone)}
           >
-            {key.objTodo.todo}
+            {key.todo}
           </li>
           <button onClick={() => deleteHandler(key.id)}>x</button>
         </span>
       );
     });
   const listDone = mytodos
-    .filter((todo) => todo.objTodo.isDone !== false)
+    .filter((todo) => todo.isDone !== false)
     .map((key) => {
       return (
         <span key={key.id}>
           <li
             style={{
-              textDecoration: key.objTodo.isDone ? 'line-through' : null,
-              background: key.objTodo.isDone ? '#DADBE6' : null,
-              color: key.objTodo.isDone ? '#2A2D34' : null,
+              textDecoration: key.isDone ? 'line-through' : null,
+              background: key.isDone ? '#DADBE6' : null,
+              color: key.isDone ? '#2A2D34' : null,
             }}
             className={classes.Todolist}
-            onClick={() => isDoneHandler(key.id, !key.objTodo.isDone)}
+            onClick={() => isDoneHandler(key.id, !key.isDone)}
           >
-            {key.objTodo.todo}
+            {key.todo}
           </li>
           <button onClick={() => deleteHandler(key.id)}>x</button>
         </span>
@@ -99,15 +99,17 @@ const mapStateToProps = (state) => {
   return {
     mytodos: state.todoReducer.mytodos,
     isLoading: state.todoReducer.isLoading,
+    localId: state.authReducer.localId
     // isDone: state.mytodos.isDone,
     // id: state.mytodos
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    onFetchTodo: () => dispatch(actionTypes.fetchTodoStart()),
-    onDeleteTodo: (id) => dispatch(actionTypes.deleteTodoStart(id)),
-    onIsDone: (id, isDone) => dispatch(actionTypes.isDoneStart(id, isDone)),
+    onFetchTodo: (localId) => dispatch(actionTypes.fetchTodoStart(localId)),
+    onDeleteTodo: (id,localId) => dispatch(actionTypes.deleteTodoStart(id,localId)),
+    onIsDone: (id, isDone, localId) => dispatch(actionTypes.isDoneStart(id, isDone, localId)),
+
   };
 };
 
