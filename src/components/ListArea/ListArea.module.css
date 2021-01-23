@@ -1,6 +1,5 @@
-
 .ListArea {
-  background: #C5C8E8;
+  background: rgba(255, 255, 255, 0.25);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(1px);
   -webkit-backdrop-filter: blur(1px);
@@ -8,6 +7,7 @@
   border: 1px solid rgba(255, 255, 255, 0.18);
   height: 50vh;
   overflow: auto;
+  
 }
 .List {
   display: inline-block;
@@ -20,10 +20,11 @@
   display: inline-block;
   width: 50%;
   list-style: none;
-  background: #2A2D34;
+  background: #2a2d34;
   border-radius: 5px;
+  border: 1px solid black;
   text-align: center;
-  color: #DADBE6;
+  color: #dadbe6;
   margin: 5px 10px;
   padding: 5px 15px;
 }
@@ -32,19 +33,67 @@
 }
 .ListArea button {
   display: inline-block;
-  background: #2A2D34;
+  background: #2a2d34;
   border-radius: 50%;
   border: none;
-  color: #DADBE6;
+  color: #dadbe6;
   width: 25px;
   height: auto;
   padding: 5px;
-
 }
 
 .ListArea button:hover {
-  background: #DADBE6;
+  background: #dadbe6;
   cursor: pointer;
-  color: #2A2D34;
+  color: #2a2d34;
 }
+@media screen and (min-width: 64rem) {
+  .ListArea {
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(1px);
+    -webkit-backdrop-filter: blur(1px);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    height: 50vh;
+    overflow: auto;
+  }
+  .List {
+    display: inline-block;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    overflow: auto;
+  }
+  .Todolist {
+    display: inline-block;
+    width: 50%;
+    list-style: none;
+    background: #2a2d34;
+    border-radius: 5px;
+    border: 1px solid black;
+    text-align: center;
+    color: #dadbe6;
+    margin: 5px 10px;
+    padding: 5px 15px;
+  }
+  .Todolist:hover {
+    cursor: pointer;
+  }
+  .ListArea button {
+    display: inline-block;
+    background: #2a2d34;
+    border-radius: 50%;
+    border: none;
+    color: #dadbe6;
+    width: 25px;
+    height: auto;
+    padding: 5px;
+  }
 
+  .ListArea button:hover {
+    background: #dadbe6;
+    cursor: pointer;
+    color: #2a2d34;
+  }
+}

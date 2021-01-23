@@ -1,13 +1,13 @@
 .Auth {
-    background: #C5C8E8;
+    background: rgba(255, 255, 255, 0.25);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(1px);
     -webkit-backdrop-filter: blur(1px);
     border-radius: 15px;
     border: 1px solid #ffffff2e;
     height: 45vh;
-    margin: 25px auto;
-    width: 30%;
+    margin: 205px auto;
+    width: 100%;
     padding: 25px 15px;
 }
 .title {
@@ -48,4 +48,15 @@
     cursor: pointer;
     text-decoration: underline;
     color: rosybrown;
+}
+@media screen and (min-width: 64rem) {
+    .Auth {
+       
+    
+        margin: 205px auto;
+        width: 40%;
+       
+    }
+
+   
 }
