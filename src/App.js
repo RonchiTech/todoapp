@@ -1,9 +1,14 @@
+import React, { useEffect } from 'react'
+import * as action from './store/actions/index'
 import Main from './components/Main/Main';
 import Auth from './auth/auth';
 import { connect } from 'react-redux';
 import { Route, Switch, Redirect } from 'react-router-dom';
-const App = ({ isAuth }) => {
+const App = ({ isAuth,onAuth }) => {
 
+  useEffect(() => {
+    onAuth();
+  },[onAuth])
   console.log(isAuth);
   let route = (
     <Switch>
@@ -26,4 +31,9 @@ const mapStateToProps = (state) => {
     isAuth: state.authReducer.idToken !== null,
   };
 };
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAuth: () => dispatch(action.authSuccess())
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(App);

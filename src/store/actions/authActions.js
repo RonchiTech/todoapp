@@ -16,11 +16,13 @@ export const auth = (email,password, isSignUp) => {
         }
         axios.post(url,authData)
         .then(response => {
+            localStorage.setItem('localId', response.data.localId)
+            localStorage.setItem('idToken', response.data.idToken)
+            localStorage.setItem('expiresIn', response.data.expiresIn)
             dispatch(authSuccess(response.data));
-            // console.log(response);
+            
         })
         .catch(error => {
-            // console.log(error);
            dispatch(authFailed(error.response.data.error.message));
         })
     }
@@ -30,12 +32,16 @@ export const authStart = () => {
         type: actionTypes.AUTH_START
     }
 }
-export const authSuccess = (data) => {
+export const authSuccess = () => {
+    
+     const localId = localStorage.getItem('localId');
+     const idToken = localStorage.getItem('idToken');
+     const expiresIn = localStorage.getItem('expiresIn');
    return {
     type: actionTypes.AUTH_SUCCESS,
-    localId: data.localId,
-    idToken: data.idToken,
-    expiresIn: data.expiresIn
+    localId: localId,
+    idToken: idToken,
+    expiresIn: expiresIn
    }
         
     
@@ -48,4 +54,12 @@ export const authFailed = (error) => {
      error
  }
     
+}
+
+export const logout = () => {
+    
+}
+
+export const checkLogout = () => {
+
 }
