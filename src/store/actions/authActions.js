@@ -33,7 +33,6 @@ export const authStart = () => {
     }
 }
 export const authSuccess = () => {
-    
      const localId = localStorage.getItem('localId');
      const idToken = localStorage.getItem('idToken');
      const expiresIn = localStorage.getItem('expiresIn');
@@ -57,6 +56,10 @@ export const authFailed = (error) => {
 }
 
 export const logout = () => {
+    return dispatch => {
+        localStorage.clear();
+        
+    }
     
 }
 

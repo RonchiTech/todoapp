@@ -1,2 +1,2 @@
 export { addTodoStart, fetchTodoStart, deleteTodoStart, isDoneStart } from './todoActions'
-export {auth, authSuccess} from './authActions'
+export {auth, authSuccess,logout} from './authActions'

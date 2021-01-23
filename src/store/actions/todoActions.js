@@ -8,9 +8,7 @@ export const initializeTodo = () => {
 }
 
 export const fetchTodoStart = (localId) => {
-  
   return dispatch => {
-    dispatch(initializeTodo())
     axios.get(`https://todoapp-a6d7d-default-rtdb.firebaseio.com/${localId}/todo.json`)
     .then(response => {
       
@@ -54,7 +52,6 @@ export const fetchTodoSuccess = (todos) => {
 export const addTodoStart = (todo,localId) => {
   return dispatch => {
     dispatch(initializeTodo())
-  
     axios.post(`https://todoapp-a6d7d-default-rtdb.firebaseio.com/${localId}/todo.json`, {
       todo,
       isDone: false

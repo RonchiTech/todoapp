@@ -5,11 +5,9 @@ import Auth from './auth/auth';
 import { connect } from 'react-redux';
 import { Route, Switch, Redirect } from 'react-router-dom';
 const App = ({ isAuth,onAuth }) => {
-
   useEffect(() => {
     onAuth();
   },[onAuth])
-  console.log(isAuth);
   let route = (
     <Switch>
       <Route exact path="/" component={Auth} />
